@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Book;
 use App\Booklist;
 use Illuminate\Http\Request;
 
@@ -29,8 +31,8 @@ class HomeController extends Controller
         //Fetching all of the users book lists
         $booklists = Booklist::where('user_id', $userId)->get();
         // fetch several users for the connect with others side bar
-
-        return view('home', compact('booklists'));
+        $users = User::all();
+        return view('home', compact('booklists', 'users'));
         
     }
 
@@ -42,6 +44,21 @@ class HomeController extends Controller
         // fetch several users for the connect with others side bar
 
         return view('home', compact('booklists'));
+        
+    }
+
+    public function profile($id)
+    {
+
+        $profile = User::find($id);
+        $booklists = Booklist::where('user_id', $id)->get();
+        $books = Book::where('user_id', $id)->get();
+        // fetch several users for the connect with others side bar
+
+
+
+
+        return view('profile', compact('profile', 'booklists', 'books'));
         
     }
 }

@@ -25,3 +25,6 @@ Route::get('/booklist/{id}', 'BooklistsController@index')->name('get-list');
 
 Route::post('/book', 'BooksController@create')->name('create-book');
 Route::get('/book/{id}', 'BooksController@show')->name('show-book');
+
+
+Route::get('/profile/{id}', 'HomeController@profile')->name('user-profile');

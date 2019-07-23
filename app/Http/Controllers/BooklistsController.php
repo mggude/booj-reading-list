@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Book;
 use App\Booklist;
 use Illuminate\Http\Request;
@@ -20,18 +21,17 @@ class BooklistsController extends Controller
     public function index($id)
     {
 
-        $booklist = Booklist::where('id', $id)->first();
+        $booklist = Booklist::find($id);
 
         //Check to see if list has a sort preference
         
-        // if ($booklist->sort_id) {
-        //     $listSortId = $booklist->sort_id;
-        // } else {
-        //     $listSortId = "default";
-        // }
+        if ($booklist->sort_id) {
+            $listSortId = $booklist->sort_id;
+        } else {
+            $listSortId = "default";
+        }
         
-        $listSortId = "default";
-
+        // Retrieving books in the list based on sort request
         switch ($listSortId) {
             case "a-z":
                 $books = Book::where('list_id', $id)
@@ -59,10 +59,13 @@ class BooklistsController extends Controller
         }
 
         $userId =  \Auth::user()->id;
-        //Fetching all of the users book lists
+        //Fetching all of the users book lists for side nav
         $booklists = Booklist::where('user_id', $userId)->get();
+        //Fetching other users for connecting
+        $users = User::all();
 
-        return view('booklist', compact('booklist', 'books', 'booklists'));
+
+        return view('booklist', compact('booklist', 'books', 'booklists', 'users'));
     }
 
     //Create a new list

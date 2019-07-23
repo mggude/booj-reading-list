@@ -76,37 +76,9 @@
             </div>
         </nav>
 
-        <div class="row no-gutters justify-content-center">
-
-            <!-- Side navigation for users book lists -->
-            <div class="col-3 col-md-2">
-                <a href="/home">
-                            <h5>Make List +</h5><br>
-                        </a>
-                @foreach ( $booklists as $booklist)
-                    <a href="/booklist/{{ $booklist->id }}">
-                        <h5>{{ $booklist->title }}</h5><br>
-                    </a>
-                @endforeach
-            </div>
-
-            <!-- Main UI for interacting with book lists/books/profiles/discover -->
-            <div class="col-9 col-md-8">
-                <main class="py-4">
+        <main class="py-4">
                     @yield('content')
-                </main>
-            </div>
-
-            <!-- Side bar for connecting with other users -->
-            <div class="col-md-2">
-                @foreach ( $users as $user)
-                    <a href="/profile/{{ $user->id }}">
-                        <h5>{{ $user->name }}</h5><br>
-                    </a>
-                @endforeach
-            </div>
-
-        </div>    
+        </main> 
     </div>
 </body>
 </html>
