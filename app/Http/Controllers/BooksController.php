@@ -39,6 +39,7 @@ class BooksController extends Controller
             }
         } else { 
             return redirect('/booklist'.'/'.$listId)->with('status', 'You must select a book.');
+
         }
     }
 
@@ -76,13 +77,14 @@ class BooksController extends Controller
         return redirect($url);
     }
 
-    public function show(Book $book)
+    public function show($id)
     {
 
         $userId =  \Auth::user()->id;
 
         $booklists = Booklist::where('user_id', $userId)->get();
 
+        $book = Book::find($id);
         return view('book', compact('book', 'booklists'));
 
     }

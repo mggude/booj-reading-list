@@ -13,15 +13,15 @@
     <!-- Row two contains form collapse buttons -->
     <div class="row no-gutters justify-content-center">
 
-        <div class="col-4">
+        <div class="col">
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#add-book-form" aria-expanded="false" aria-controls="multiCollapseExample2">Add A Book +</button>
         </div>
 
-        <div class="col-4">
+        <div class="col">
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#sort-books-form" aria-expanded="false" aria-controls="multiCollapseExample2">Sort List</button>
         </div>
 
-        <div class="col-4">
+        <div class="col">
              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#edit-slct-form" aria-expanded="false" aria-controls="multiCollapseExample2">Edit Selected</button>
         </div>
     </div>
@@ -83,63 +83,72 @@
                     <button>Submit</button>
                 </a>
             </div>
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
+            
         </div>
     </div>
 
-    <!-- Book list headers -->
-    <div class="row no-gutters list-row" style="margin-bottom:15px">
-        <strong class="col-5 col-sm-3">Title</strong>
-        <strong class="col-5 col-sm-3">Author</strong>
-        <strong class="col-sm-2 d-none d-sm-block">Completed</strong>
-        <strong class="col-sm-2 d-none d-sm-block">Rating</strong>
-        <strong class="col-2 col-sm-2">Select</strong>
-    </div>
+    @if (session('status'))
+        
+                <div class="alert alert-warning" role="alert">
+                {{ session('status') }}
+                </div>
+            @endif
   
-    <!-- Render Book Rows -->
-    <form id="updateBooklist" method="POST" action="/book/multiple">
-        {{ csrf_field() }}
+    
 
         <!-- Display the book entries-->
         @if ( count($books) > 0 )
-            @foreach ( $books as $book)
-                <div class="row no-gutters list-row bg-secondary">
-                    <p class="col-5 col-sm-3"><a href="/book/{{ $book->id }}" class="text-white">{{ $book -> title }}</a></p>
-                    <p class="col-5 col-sm-3">{{ $book -> author }}</p>
-                    <p class="col-sm-2 d-none d-sm-block">{{ $book -> date_completed }}</p>
-                    <p class="col-sm-2 d-none d-sm-block">
-                        <?php 
-                            for ($x = 0; $x < $book->rating; $x++) {
-                                echo "+";
-                            } 
-                        ?>
-                    </p>
-                    <input class="col-2 col-sm-2" type="checkbox" name="bookitem[]" value="{{ $book->id }}">
+            <!-- Render Book Rows -->
+            <form id="updateBooklist" method="POST" action="/book/multiple">
+                {{ csrf_field() }}
+                <input type="text" value="{{ $booklist->id }}" name="listId" style="display:none">
+                <!-- Book list headers -->
+                <div class="row no-gutters list-row" style="margin-bottom:15px">
+                    <strong class="col-5 col-sm-3">Title</strong>
+                    <strong class="col-5 col-sm-3">Author</strong>
+                    <strong class="col-sm-2 d-none d-sm-block">Completed</strong>
+                    <strong class="col-sm-2 d-none d-sm-block">Rating</strong>
+                    <strong class="col-2 col-sm-2">Select</strong>
                 </div>
-                <br>
-            @endforeach 
-        @else
-
-            <div class="col-12 col-md-8 empty-list">
-                <strong>Looks like you haven't made any entries yet. Click the button below to discover books</strong>
-            </div>
-            
-            <a href="/home/discover">
-        <button href="/discover">Discover Books</button>
-        </a>
-
+                @foreach ( $books as $book)
+                    <div class="row no-gutters list-row bg-secondary">
+                        <p class="col-5 col-sm-3"><a href="/book/{{ $book->id }}" class="text-white">{{ $book -> title }}</a></p>
+                        <p class="col-5 col-sm-3">{{ $book -> author }}</p>
+                        <p class="col-sm-2 d-none d-sm-block">{{ $book -> date_completed }}</p>
+                        <p class="col-sm-2 d-none d-sm-block">
+                            <?php 
+                                for ($x = 0; $x < $book->rating; $x++) {
+                                    echo "+";
+                                } 
+                            ?>
+                        </p>
+                        <input class="col-2 col-sm-2" type="checkbox" name="bookitem[]" value="{{ $book->id }}">
+                    </div>
+                    <br>
+                @endforeach 
+            </form>
+                <!-- Creating array for checked boxes -->
+                <?php 
+                    if (isset($_POST['bookitem'])) 
+                    {
+                        print_r($_POST['bookitem']); 
+                    }
+                    ?>
+            @else
+                <div class="col-12 col-md-8">
+                    <div class="alert alert-info" role="alert" style="margin-top:25px">
+                        <h4 class="alert-heading">Add a book to your list!</h4>
+                                <br>
+                        Discover books for your list...
+                        <br>
+                        <a href="{{ route('home-discover') }}">
+                            <button>Discover Books</button>
+                        </a>
+                        <hr>
+                        <p class="mb-0">Or use the pannel above to add a book.</p>
+                    </div>
+                </div>
         @endif
-    </form>
-    <?php 
-        if (isset($_POST['bookitem'])) 
-        {
-            print_r($_POST['bookitem']); 
-        }
-        ?>
 
 </div>
 @endsection

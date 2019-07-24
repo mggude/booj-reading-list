@@ -10,10 +10,41 @@
 
     <div>
         <a href="/home">Home</a>
-        <nav id="navbar-example2" class="navbar sticky-top navbar-light bg-light">
+        <nav id="navbar-example2" class="navbar sticky-top navbar-dark bg-dark">
             <a class="navbar-brand" href="#">Categories</a>
             <ul class="nav nav-pills" id="discover-nav"></ul>
         </nav>
+
+        <div class="row no-gutters justify-content-center" style="color:white">
+            <div class="form-check col-4 col-sm-2 col-md-1">
+                <input class="form-check-input" type="radio" name="searchParam"value="title" checked>
+                <label class="form-check-label" for="searchTitle">
+                    Title
+                </label>
+            </div>
+            <div class="form-check col-4 col-sm-2 col-md1">
+                <input class="form-check-input" type="radio" name="searchParam" value="author">
+                <label class="form-check-label" for="searchAuthor">
+                    Author
+                </label>
+            </div>
+                <div class="form-check col-4 col-sm-2 col-md-1">
+                <input class="form-check-input" type="radio" name="searchParam" value="subject">
+                <label class="form-check-label" for="searchSubject">
+                    Subject
+                </label>
+            </div>
+
+
+            <div class="input-group search-area">
+                <input class="col-8 col-lg-4" type="text" id="searchBox">
+                <button class="col-2 col-lg-1" id="searchButton">Search</button>
+            </div>
+        </div>
+
+        <div id="searchResults">
+            
+        </div>
 
         <!-- Modal For Adding Books -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
@@ -44,12 +75,12 @@
                         </div>
                         <div class="form-group">
                         <label for="addRating">Book Rating</label>
-                            <select type="select" class="form-control" id="addRating" placeholder="">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
+                            <select type="select" class="form-control" id="addRating" placeholder="">   
                                 <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
                             </select>
                         </div>
                         <div class="form-group">
