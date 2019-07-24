@@ -38,10 +38,9 @@ class HomeController extends Controller
 
     public function discover()
     {
-
+        //Getting the users book lists for access in the add book form
         $userId =  \Auth::user()->id;
         $booklists = Booklist::where('user_id', $userId)->get();
-        // fetch several users for the connect with others side bar
 
         return view('discover', compact('booklists'));
         

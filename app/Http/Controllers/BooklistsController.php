@@ -22,6 +22,11 @@ class BooklistsController extends Controller
     {
         //Find the selected list
         $booklist = Booklist::find($id);
+        $userId =  \Auth::user()->id;
+        $list_user_id = $booklist->user_id;
+        if ($userId !== $list_user_id) {
+            return redirect('/home')->with('status', 'This is not your book list');
+        }
 
         //Check to see if list has a sort preference
         if ($booklist->sort_id) {

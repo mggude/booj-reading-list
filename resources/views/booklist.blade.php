@@ -83,6 +83,11 @@
                     <button>Submit</button>
                 </a>
             </div>
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
         </div>
     </div>
 
@@ -100,22 +105,34 @@
         {{ csrf_field() }}
 
         <!-- Display the book entries-->
-        @foreach ( $books as $book)
-            <div class="row no-gutters list-row bg-light">
-                <p class="col-5 col-sm-3"><a href="/book/{{ $book->id }}">{{ $book -> title }}</a></p>
-                <p class="col-5 col-sm-3">{{ $book -> author }}</p>
-                <p class="col-sm-2 d-none d-sm-block">{{ $book -> date_completed }}</p>
-                <p class="col-sm-2 d-none d-sm-block">
-                    <?php 
-                        for ($x = 0; $x < $book->rating; $x++) {
-                            echo "+";
-                        } 
-                    ?>
-                </p>
-                <input class="col-2 col-sm-2" type="checkbox" name="bookitem[]" value="{{ $book->id }}">
+        @if ( count($books) > 0 )
+            @foreach ( $books as $book)
+                <div class="row no-gutters list-row bg-secondary">
+                    <p class="col-5 col-sm-3"><a href="/book/{{ $book->id }}" class="text-white">{{ $book -> title }}</a></p>
+                    <p class="col-5 col-sm-3">{{ $book -> author }}</p>
+                    <p class="col-sm-2 d-none d-sm-block">{{ $book -> date_completed }}</p>
+                    <p class="col-sm-2 d-none d-sm-block">
+                        <?php 
+                            for ($x = 0; $x < $book->rating; $x++) {
+                                echo "+";
+                            } 
+                        ?>
+                    </p>
+                    <input class="col-2 col-sm-2" type="checkbox" name="bookitem[]" value="{{ $book->id }}">
+                </div>
+                <br>
+            @endforeach 
+        @else
+
+            <div class="col-12 col-md-8 empty-list">
+                <strong>Looks like you haven't made any entries yet. Click the button below to discover books</strong>
             </div>
-            <br>
-        @endforeach 
+            
+            <a href="/home/discover">
+        <button href="/discover">Discover Books</button>
+        </a>
+
+        @endif
     </form>
     <?php 
         if (isset($_POST['bookitem'])) 

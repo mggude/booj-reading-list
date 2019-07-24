@@ -24,19 +24,22 @@ class BooksController extends Controller
         $newLocation = $request->booklist;
         $items = $request->bookitem;
 
-        switch ($action) {
-            case "delete":
-                foreach($items as $item) { Book::find($item)->delete(); };
-                break;
-            case "move":
-                foreach($items as $item) { Book::find($item)->update(['list_id' => $newLocation ]); };
-
-                break;
-            default:
-                break;
+        if ($items) {
+            switch ($action) {
+                case "delete":
+                        foreach($items as $item) { Book::find($item)->delete(); };
+                        return redirect('/booklist'.'/'.$listId);
+                        break;
+                case "move":
+                        foreach($items as $item) { Book::find($item)->update(['list_id' => $newLocation ]); };
+                        return redirect('/booklist'.'/'.$listId);
+                        break;
+                default:
+                    break;
+            }
+        } else { 
+            return redirect('/booklist'.'/'.$listId)->with('status', 'You must select a book.');
         }
-
-        return redirect('/booklist'.'/'.$listId);
     }
 
     //Create a new book

@@ -4,12 +4,7 @@
     <div>
         <div class="row no-gutters">
             <div class="col-sm-12">
-                <h3>Welcom {{ Auth::user()->name }}</h3>
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif   
+                <h3>Welcome {{ Auth::user()->name }}</h3>  
             </div>
         </div>
 

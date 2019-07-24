@@ -26,6 +26,10 @@
         .bk-nav-item{
             margin: 7px 0 0 7px;
         }
+
+        .empty-list {
+            
+        }
         </style>
 </head>
 <body>
@@ -84,20 +88,20 @@
         <div class="row no-gutters justify-content-center">
 
             <!-- Side navigation for users book lists -->
-            <div class="col-3 col-md-2 bg-info">
+            <div class="col-3 col-md-2 bg-dark text-light" style="height:90vh">
                 <a href="/home">
-                            <h5 class="bk-nav-item"> Make List +</h5><br>
+                            <h5 class="bk-nav-item text-light"> Make List +</h5><br>
                         </a>
                 @foreach ( $booklists as $booklist)
                     <a href="/booklist/{{ $booklist->id }}">
-                        <h5 class="bk-nav-item"> {{ $booklist->title }}</h5><br>
+                        <h5 class="bk-nav-item text-light"> {{ $booklist->title }}</h5><br>
                     </a>
                 @endforeach
             </div>
 
             <!-- Main UI for interacting with book lists/books/profiles/discover -->
             <div class="col-9 col-md-8">
-                <main class="py-4">
+                <main class="py-4" style="margin-left:15px">
                     @yield('content')
                 </main>
             </div>
