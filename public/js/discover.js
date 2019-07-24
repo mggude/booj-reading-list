@@ -83,7 +83,7 @@ $( document ).ready(function() {
     function addBook(book) {
         console.log(book);
         $("#exampleModalCenter").modal("show");
-        $("#addTitle").val(book.title);
-        $("#addAuthor").val(book.authors[0]);
+        $("#title").val(book.title);
+        $("#author").val(book.authors[0]);
     }
 });

@@ -3,19 +3,25 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ExampleTest extends TestCase
+class UsersTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testBasicTest()
-    {
-        $response = $this->get('/');
+    use RefreshDatabase;
 
-        $response->assertStatus(200);
+    /** @test */
+    public function a_user_is_created()
+    {
+        $this->actingAs(factory('App\User')->create());
+        
+        $this->post('/booklist', [
+            'user_id' => '1',
+            'title' => 'Best Book',
+            'creator' => 'Jill',
+            'sort_id' => 'authorasc',
+        ]);
+
+        $this->assertDatabaseHas('booklists', ['title' => 'Best Book']);
     }
 }

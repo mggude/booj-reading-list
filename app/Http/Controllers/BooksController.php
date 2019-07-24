@@ -38,7 +38,7 @@ class BooksController extends Controller
                     break;
             }
         } else { 
-            return redirect('/booklist'.'/'.$listId)->with('status', 'You must select a book.');
+            return redirect()->back()->with('status', 'You must select a book.');
 
         }
     }
@@ -70,11 +70,8 @@ class BooksController extends Controller
         $book->rating = $request->rating;
 
         $book->save();
-        
-        //Redirect to the booklist this book was added to
-        $url = '/booklist'.'/'.$book->list_id;
 
-        return redirect($url);
+        return redirect()->back()->with('message', 'IT WORKS!');
     }
 
     public function show($id)
@@ -86,6 +83,25 @@ class BooksController extends Controller
 
         $book = Book::find($id);
         return view('book', compact('book', 'booklists'));
+
+    }
+
+    public function update(Request $request, $id)
+    {
+
+        $book = Book::find($id);
+
+        $book->title = $request->title;
+
+        $book->author = $request->author;
+
+        $book->date_completed = $request->date_completed;
+
+        $book->rating = $request->rating;
+
+        $book->save();
+        
+        return redirect()->back()->with('message', 'Book successfully updated!');
 
     }
 

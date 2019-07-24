@@ -55,48 +55,55 @@
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Add Book</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" action="/book">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="addTitle" aria-describedby="emailHelp" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="addAuthor" placeholder="Book Author">
-                        </div>
-                        <div class="form-group">
-                        <label for="addDate">Date Completed</label>
-                            <input type="date" class="form-control" name="addDate" id="addDate">
-                        </div>
-                        <div class="form-group">
-                        <label for="addRating">Book Rating</label>
-                            <select type="select" class="form-control" id="addRating" placeholder="">   
-                                <option value="5">5</option>
-                                <option value="4">4</option>
-                                <option value="3">3</option>
-                                <option value="2">2</option>
-                                <option value="1">1</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="booklist">Select a book list</label>
-                            <select name="booklist" class="form-control" type="select" form="updateBooklist" placeholder="Delete/Move Selected Books" required>
-                                @foreach ( $booklists as $booklist)
-                                    <option value="{{ $booklist->id }}">{{ $booklist->title }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-success">Add Book</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Add Book</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="/book">
+                            {{ csrf_field() }}
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="author" id="author" placeholder="Book Author">
+                            </div>
+                            <div class="form-group">
+                                <label for="date_completed">Date Completed</label>
+                                <input type="date" class="form-control" name="date_completed" id="date_completed">
+                            </div>
+                            <div class="form-group">
+                                <label for="rating">Book Rating</label>
+                                <select name="rating" type="select" class="form-control" id="rating">   
+                                    <option value="5">5</option>
+                                    <option value="4">4</option>
+                                    <option value="3">3</option>
+                                    <option value="2">2</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="list_id">Select a book list</label>
+                                <select name="list_id" class="form-control" type="select" required>
+                                    @foreach ( $booklists as $booklist)
+                                        <option value="{{ $booklist->id }}">{{ $booklist->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success">Add Book</button>
+                            @if (session('status'))
+                            <div class="alert alert-warning" role="alert">
+                            {{ session('status') }}
+                            </div>
+                            @endif
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -40,6 +40,9 @@
                     </div>
                 </form>
             </div>
+            <div class="row no-gutters justify-content-center">
+                <a href="/home/discover">Discover</a>
+            </div>
         </div>
 
        
