@@ -18,13 +18,19 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home/discover', 'HomeController@discover')->name('home');
+Route::get('/home/discover', 'HomeController@discover')->name('home-discover');
+Route::get('/profile/{id}', 'HomeController@profile')->name('user-profile');
+
 
 Route::post('/booklist', 'BooklistsController@create')->name('create-list');
 Route::get('/booklist/{id}', 'BooklistsController@index')->name('get-list');
+Route::put('/booklist/{id}', 'BooklistsController@update')->name('update-list');
+
 
 Route::post('/book', 'BooksController@create')->name('create-book');
-Route::get('/book/{id}', 'BooksController@show')->name('show-book');
+Route::get('/book/{id}', 'BooksController@show')->name('get-book');
+Route::put('/book/{id}', 'BooksController@update')->name('update-book');
+Route::post('/book/multiple', 'BooksController@multiple')->name('update-multiple');
 
-
-Route::get('/profile/{id}', 'HomeController@profile')->name('user-profile');
+Route::get('/{any}', 'HomeController@catchAll')->where('any', '.*');
+Route::any('/{any}', 'HomeController@index')->where('any', '.*');

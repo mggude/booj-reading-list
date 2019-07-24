@@ -17,10 +17,11 @@ class BooksController extends Controller
     }
 
     // Handle multiple selected requests
-    public function index(Request $request)
+    public function multiple(Request $request)
     {
-        
-        $action = $request->hello;
+        $listId = $request->listId;
+        $action = $request->userAction;
+        $newLocation = $request->booklist;
         $items = $request->bookitem;
 
         switch ($action) {
@@ -28,14 +29,14 @@ class BooksController extends Controller
                 foreach($items as $item) { Book::find($item)->delete(); };
                 break;
             case "move":
+                foreach($items as $item) { Book::find($item)->update(['list_id' => $newLocation ]); };
 
                 break;
             default:
                 break;
         }
 
-        return redirect('/booklist/{id}');
-
+        return redirect('/booklist'.'/'.$listId);
     }
 
     //Create a new book

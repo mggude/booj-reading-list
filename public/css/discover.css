@@ -1,0 +1,28 @@
+.scrollmenu {
+    margin: 10px 30px;
+    height: 400px;
+}
+
+div.scrollmenu {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+div.scrollmenu a:hover {
+    background-color: #777;
+}
+
+.book-card {
+    display: inline-block;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+
+.category-heading {
+    text-align: center;
+}
+
+.book-card {
+    z-index: 1;
+}

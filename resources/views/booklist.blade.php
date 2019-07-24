@@ -26,7 +26,7 @@
         </div>
     </div>
     <!-- Row three contains input forms -->
-    <div class="row no-gutters justify-content-center">
+    <div class="row no-gutters justify-content-center bg-light">
         <!-- Add Book Form -->
         <div class="col-12">
             <div class="collapse multi-collapse" id="add-book-form">
@@ -48,31 +48,38 @@
         <!-- Sort List Form -->
         <div class="col-12">
             <div class="collapse multi-collapse" id="sort-books-form">
-                <select name="sort{{ $booklist->id }}" id="sort{{ $booklist->id }}" class="form-control" type="select" placeholder="Delete/Move Selected Books">
-                    <option value="a-z">A-Z</option>
-                    <option value="z-a">Z-A</option>
-                    <option value="num-asc">Ass</option>
-                    <option value="num-desc">Dec</option>
-                </select><br>
-                <button class="sort-btn">Sort</button>
+                <form method="POST" action="/booklist/{{ $booklist->id }}">
+                    {{method_field('PUT')}}
+                    {{ csrf_field() }}
+                    <select name="sortOptions" id="sortOptions" class="form-control" type="select" placeholder="Sort By...">
+                        <option value="title">Title</option>
+                        <option value="author">Author</option>
+                        <option value="date">Date Completed</option>
+                        <option value="rating">Rating</option>
+                        <option value="custom">My Order</option>
+                    </select><br>
+                    <input type="radio" name="sortid" value="asc">Ascending
+                    <input type="radio" name="sortid" value="desc">Descending
+                    <button class="sort-btn" type="submit">Sort</button>
+                </form>
             </div>
         </div>
         <!-- Edit Selected Books Form -->
         <div class="col-12">
             <div class="collapse multi-collapse" id="edit-slct-form">
-                <select name="action" class="form-control" form="list{{ $booklist->id }}" type="select">
+                <input type="text" name="listId" value="{{ $booklist->id }}" style="display:none">
+                <select name="userAction" id="userAction" class="form-control"  type="select" form="updateBooklist">
                     <option value="delete">Delete Selected</option>
                     <option value="move">Move Selected</option>
-                    <option>Sort All</option>
                 </select>
-                <select name="booklist" class="form-control" type="select" placeholder="Delete/Move Selected Books">
+                <select name="booklist" class="form-control" type="select" form="updateBooklist" placeholder="Delete/Move Selected Books" required>
                     @foreach ( $booklists as $booklist)
-                    <option value="{{ $booklist->id }}">{{ $booklist->title }}</option>
+                        <option value="{{ $booklist->id }}">{{ $booklist->title }}</option>
                     @endforeach
                 </select>
                 <a class="" style="text-align:right"
                     onclick="event.preventDefault();
-                    document.getElementById('list{{ $booklist->id }}').submit();">
+                    document.getElementById('updateBooklist').submit();">
                     <button>Submit</button>
                 </a>
             </div>
@@ -87,15 +94,14 @@
         <strong class="col-sm-2 d-none d-sm-block">Rating</strong>
         <strong class="col-2 col-sm-2">Select</strong>
     </div>
-    <!-- Row renders books in list -->
-
-    <form id="list{{ $booklist->id }}" methodzs="POST" action="/home/edit">
-        <!-- {{ method_field('DELETE') }} -->
+  
+    <!-- Render Book Rows -->
+    <form id="updateBooklist" method="POST" action="/book/multiple">
         {{ csrf_field() }}
 
         <!-- Display the book entries-->
         @foreach ( $books as $book)
-            <div class="row no-gutters list-row">
+            <div class="row no-gutters list-row bg-light">
                 <p class="col-5 col-sm-3"><a href="/book/{{ $book->id }}">{{ $book -> title }}</a></p>
                 <p class="col-5 col-sm-3">{{ $book -> author }}</p>
                 <p class="col-sm-2 d-none d-sm-block">{{ $book -> date_completed }}</p>
@@ -106,7 +112,7 @@
                         } 
                     ?>
                 </p>
-                <input class="col-2 col-sm-2" type="checkbox" name="bookitem[]" value="{{ $book->id }}" checked>
+                <input class="col-2 col-sm-2" type="checkbox" name="bookitem[]" value="{{ $book->id }}">
             </div>
             <br>
         @endforeach 

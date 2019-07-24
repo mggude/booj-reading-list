@@ -7,4 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     //
+
+    protected $fillable = [
+        'list_id',
+    ];
 }

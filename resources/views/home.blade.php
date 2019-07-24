@@ -33,5 +33,10 @@
             </div>
         </div>
 
+
+        <a href="/home/discover">
+        <button href="/discover">Discover Books</button>
+        </a>
+
     </div>
 @endsection

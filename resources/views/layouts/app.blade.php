@@ -21,7 +21,12 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ URL::asset('css/home.css') }}" />
-
+    
+    <style>
+        .bk-nav-item{
+            margin: 7px 0 0 7px;
+        }
+        </style>
 </head>
 <body>
     <div id="app">
@@ -79,13 +84,13 @@
         <div class="row no-gutters justify-content-center">
 
             <!-- Side navigation for users book lists -->
-            <div class="col-3 col-md-2">
+            <div class="col-3 col-md-2 bg-info">
                 <a href="/home">
-                            <h5>Make List +</h5><br>
+                            <h5 class="bk-nav-item"> Make List +</h5><br>
                         </a>
                 @foreach ( $booklists as $booklist)
                     <a href="/booklist/{{ $booklist->id }}">
-                        <h5>{{ $booklist->title }}</h5><br>
+                        <h5 class="bk-nav-item"> {{ $booklist->title }}</h5><br>
                     </a>
                 @endforeach
             </div>
@@ -98,10 +103,11 @@
             </div>
 
             <!-- Side bar for connecting with other users -->
-            <div class="col-md-2">
+            <div class="col-2 d-none d-md-block bg-light">
+                <h5 class="bk-nav-item">Connect With Other Users</h5>
                 @foreach ( $users as $user)
                     <a href="/profile/{{ $user->id }}">
-                        <h5>{{ $user->name }}</h5><br>
+                        <h5 class="bk-nav-item">{{ $user->name }}</h5><br>
                     </a>
                 @endforeach
             </div>

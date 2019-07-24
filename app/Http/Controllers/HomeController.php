@@ -43,7 +43,7 @@ class HomeController extends Controller
         $booklists = Booklist::where('user_id', $userId)->get();
         // fetch several users for the connect with others side bar
 
-        return view('home', compact('booklists'));
+        return view('discover', compact('booklists'));
         
     }
 
@@ -55,10 +55,14 @@ class HomeController extends Controller
         $books = Book::where('user_id', $id)->get();
         // fetch several users for the connect with others side bar
 
-
-
-
         return view('profile', compact('profile', 'booklists', 'books'));
         
+    }
+
+    public function catchAll()
+    {
+
+        return route('/');
+
     }
 }
