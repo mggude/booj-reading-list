@@ -1,12 +1,66 @@
-# Booj Reading List
-#### Discover, Read, Be Origional
 
-[boojreadinglist.xyz](http://boojreadinglist.xyz)
+<h1 align="center">
+Booj Reading List
+</h1>
 
-**booj reading list app... probably the best reading list app ever**
+<h3 align="center">
+Discover, Read, Be Origional
+</h3>
 
-Built with a Laravel framework and hosted on an AWS EC2 instance.
+<p align="center">
+    <strong>
+probably the best reading list app ever
+</strong>
+    </p>
 
-<p width="49%">
-    <img alt="Connor Jaksik" src="./src/images/readme/portfolio-1.PNG" width="160" />
-</p>
+##### Live Demo
+    [boojreadinglist.xyz](http://boojreadinglist.xyz)
+
+
+Built using...
+* Laravel framework
+* MySQL Database
+* Hosted on AWS EC2 instance
+
+<div margin:"0 auto">
+    <img alt="Connor Jaksik" src="https://raw.githubusercontent.com/jaksik/booj-reading-list/master/public/images/landing.PNG" width="100%" />
+</div>
+
+**Register an account**
+
+ <div margin:"0 auto">
+    <img alt="Connor Jaksik" src="https://raw.githubusercontent.com/jaksik/booj-reading-list/master/public/images/register.PNG" width="50%" />
+</div>
+
+**Create a book list**
+
+ <div margin:"0 auto">
+    <img alt="Connor Jaksik" src="https://raw.githubusercontent.com/jaksik/booj-reading-list/master/public/images/createlist.PNG" width="49%" style="float:left/>
+</div>     
+
+**Add a book to your list**
+
+ <div margin:"0 auto">
+    <img alt="Connor Jaksik" src="https://raw.githubusercontent.com/jaksik/booj-reading-list/master/public/images/addbook.PNG" width="49%" style="float:left"/>
+</div>     
+
+**Discover new books**
+
+ <div margin:"0 auto">
+    <img alt="Connor Jaksik" src="https://raw.githubusercontent.com/jaksik/booj-reading-list/master/public/images/discover.PNG" width="50%" />
+</div> 
+
+**Edit your list**
+
+ <div margin:"0 auto">
+    <img alt="Connor Jaksik" src="https://raw.githubusercontent.com/jaksik/booj-reading-list/master/public/images/editlist.PNG" width="50%" />
+</div> 
+
+**See what others are reading**
+
+ <div margin:"0 auto">
+    <img alt="Connor Jaksik" src="https://raw.githubusercontent.com/jaksik/booj-reading-list/master/public/images/connect.PNG" width="50%" />
+</div> 
+
+
+                                                                                                                                       
