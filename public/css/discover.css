@@ -26,6 +26,7 @@ div.scrollmenu a:hover {
 }
 
 .category-heading {
+    padding-top: 100px;
     text-align: center;
     color: white;
 }

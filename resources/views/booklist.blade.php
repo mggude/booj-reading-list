@@ -6,14 +6,14 @@
 <div class="home-console">
     <!-- Row one renders list details -->
     <div class="row no-gutters bg-white">
-        <div class="col-10">
+        <div class="col-10" style="padding-left:20px">
             <h2>{{ $booklist->title }}</h2>
             <p>Creator: <strong>{{ $booklist->creator }}</strong></p>
             <p>Created On: <strong>{{ $booklist->created_at }}</strong></p>
         </div>
     </div>
     <!-- Row two, buttons for collapsible forms -->
-    <div class="row no-gutters justify-content-center bg-white">
+    <div class="row no-gutters justify-content-center bg-white" style="padding-bottom:20px">
         <div class="col">
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#add-book-form" aria-expanded="false" aria-controls="multiCollapseExample2">Add A Book +</button>
         </div>
@@ -31,18 +31,31 @@
         @endif
     </div>
     <!-- Row three contains collapsible forms -->
-    <div class="row no-gutters justify-content-center">
+    <div class="row no-gutters justify-content-center bg-light">
         <!-- Add Book Form -->
-        <div class="col-12">
+        <div class="col-12 col-lg-4" style="background-color:white">
             <div class="collapse multi-collapse" id="add-book-form">
-                <form method="POST" action="/book">
+            <p style="text-align:center"><strong>Add a book to this list</strong></p>
+            <form method="POST" action="/book">
                     {{ csrf_field() }}
-                    <div class="row no-gutters">
+                    <div class="row no-gutters justify-content-center">
+                    <div class="form-group">
                         <input type="integer" name="list_id" value="{{ $booklist->id}}" style="display:none">
+                        <label for="title">Title</label>
                         <input class="form-control" type="text" name="title" placeholder="Title" required>
+                        <label for="author">Author</label>
                         <input class="form-control" type="text" name="author" placeholder="Author">
+                        <label for="date_completed">Date Completed</label>
                         <input class="form-control" type="date" name="date_completed" placeholder="Date Completed">
-                        <input class="form-control" type="integer" name="rating" placeholder="Rating">
+                            <label for="rating">Book Rating</label>
+                            <select name="rating" type="select" class="form-control" id="rating">   
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-success add-btn" style="text-align:right;float:right"> 
                                 Add Book
@@ -52,34 +65,17 @@
         </div>
         <!-- Only render update forms if there are books to update -->
         @if ( count($books) > 0 )
-            <!-- Sort List Form -->
-            <div class="col-12">
-                <div class="collapse multi-collapse" id="sort-books-form">
-                    <form method="POST" action="/booklist/{{ $booklist->id }}">
-                        {{method_field('PUT')}}
-                        {{ csrf_field() }}
-                        <select name="sortOptions" id="sortOptions" class="form-control" type="select" placeholder="Sort By...">
-                            <option value="title">Title</option>
-                            <option value="author">Author</option>
-                            <option value="date">Date Completed</option>
-                            <option value="rating">Rating</option>
-                            <option value="custom">My Order</option>
-                        </select><br>
-                        <input type="radio" name="sortid" value="asc">Ascending
-                        <input type="radio" name="sortid" value="desc">Descending
-                        <button class="sort-btn" type="submit">Sort</button>
-                    </form>
-                </div>
-            </div>
             <!-- Edit Selected Books Form -->
-            <div class="col-12">
+            <div class="col-10 col-md-6 col-lg-4 bg-white">
                 <div class="collapse multi-collapse" id="edit-slct-form">
                     <input type="text" name="listId" value="{{ $booklist->id }}" style="display:none">
+                    <label for="userAction">Move or delete selected books</label>
                     <select name="userAction" id="userAction" class="form-control"  type="select" form="updateBooklist">
                         <option value="move">Move Selected</option>
                         <option value="delete">Delete Selected</option>
                     </select>
                     <div id="select-list">
+                        <label for="userAction">If moving, select a destination list</label>
                         <select name="booklist" id="booklist" class="form-control" type="select" form="updateBooklist" required>
                             @foreach ( $booklists as $booklist)
                                 <option value="{{ $booklist->id }}">{{ $booklist->title }}</option>
@@ -92,6 +88,27 @@
                         <button>Submit</button>
                     </a>
                 </div> 
+            </div>
+            <!-- Sort List Form -->
+            <div class="col-10 col-md-6 col-lg-4">
+                <div class="collapse multi-collapse" id="sort-books-form">
+                    <form method="POST" action="/booklist/{{ $booklist->id }}">
+                        {{method_field('PUT')}}
+                        {{ csrf_field() }}
+                        <label for="sortOptions">Sort By</label>
+                        <select name="sortOptions" id="sortOptions" class="form-control" type="select" placeholder="Sort By...">
+                            <option value="title">Title</option>
+                            <option value="author">Author</option>
+                            <option value="date">Date Completed</option>
+                            <option value="rating">Rating</option>
+                            <option value="custom">My Order</option>
+                        </select><br>
+                        <input type="radio" name="sortid" value="asc">Ascending
+                        <input type="radio" name="sortid" value="desc">Descending
+                        <br>
+                        <button class="sort-btn" type="submit">Sort</button>
+                    </form>
+                </div>
             </div>
         @endif
         <!-- Render message if it's there, from back-end validation -->
@@ -118,8 +135,8 @@
             </div>
             <!-- Rendering the book data -->
             @foreach ( $books as $book)
-                <div class="row no-gutters list-row bg-secondary">
-                    <p class="col-5 col-sm-3"><a href="/book/{{ $book->id }}" class="text-white">{{ $book -> title }}</a></p>
+                <div class="row no-gutters list-row bg-light text-dark" style="padding-left:10px">
+                    <p class="col-5 col-sm-3"><a href="/book/{{ $book->id }}" class="">{{ $book -> title }}</a></p>
                     <p class="col-5 col-sm-3">{{ $book -> author }}</p>
                     <p class="col-sm-2 d-none d-sm-block">{{ $book -> date_completed }}</p>
                     <!-- Rendering stars for the rating. -->

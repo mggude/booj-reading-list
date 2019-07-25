@@ -50,14 +50,16 @@ class HomeController extends Controller
     public function profile($id)
     {
 
-        //For seeing what others are reading.
+         //For seeing what others are reading.
         //Ability to make boooklists private coming soon
         $profile = User::find($id);
-        $booklists = Booklist::where('user_id', $id)->get();
-        $books = Book::where('user_id', $id)->get();
-
-        return view('profile', compact('profile', 'booklists', 'books'));
-        
+        if ($profile) {
+            $booklists = Booklist::where('user_id', $id)->get();
+            $books = Book::where('user_id', $id)->get();
+            return view('profile', compact('profile', 'booklists', 'books'));
+        } else {
+            return redirect('home');
+        }
     }
 
     public function catchAll()

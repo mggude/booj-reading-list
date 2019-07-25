@@ -9,18 +9,6 @@
             </div>
         </div>
         <div class="row no-gutters justify-content-center">
-            <!-- Alert the user to make a book list if they haven't already -->  
-            @if ( count($booklists) < 1 )
-                <div class="col-10">
-                    <div class="alert alert-info alert-dismissible fade show" role="alert" style="margin-top:20px">
-                        <strong>Looks like you don't have a book list yet!</strong> Use the form below to get started.
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-            @endif
-            <br>
             <div class="col-sm-10 col-md-8 col-lg-6">
                 <h5 style="text-align:center;margin-top:20px">Create A Reading List</h5>
                 <!-- Form to create a reading list -->
@@ -45,12 +33,28 @@
         </div>
 
         <!-- If the user has a booklist show the button to discover books -->
-        @if ( count($booklists) > 1 )
-        <div class="row no-gutters justify-content-center" style="margin-top:50px">
-                <a href="/discover">
+        @if ( count($booklists) > 0 )
+            <br>
+            <br>
+            <div class="col-12 col-md-8">
+                <div class="alert alert-info" role="alert" style="margin-top:25px">
+                    <h4 class="alert-heading">Discover new books!</h4>
+                    <br>
+                    <a href="/discover">
                     <button type="button" href="/discover" class="btn btn-info">Discover Books</button>
                 </a>
+                </div>
             </div>
+        <!-- Alert the user to make a book list if they haven't already -->  
+        @else
+                <div class="col-10">
+                    <div class="alert alert-info alert-dismissible fade show" role="alert" style="margin-top:20px">
+                        <strong>Looks like you don't have a book list yet!</strong> Use the form below to get started.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
         @endif
     </div>
 @endsection

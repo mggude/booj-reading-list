@@ -19,6 +19,7 @@ class CreateBooklistsTable extends Migration
             $table->string('title');
             $table->string('creator');
             $table->string('sort_id')->nullable();
+            $table->date('created_at');	
             $table->timestamps();
         });
     }

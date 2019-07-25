@@ -30,6 +30,12 @@
         .home-console {
             margin-top: -25px;
         }
+
+        .list-nav {
+            background-color: #ff000059;
+            min-height: 95vh;
+        }
+
         </style>
 </head>
 <body>
@@ -96,26 +102,27 @@
         <div class="row no-gutters justify-content-center">
 
             <!-- Side navigation for users book lists -->
-            <div class="col-3 col-md-2 bg-dark text-light" style="height:90vh">
+            <div class="col-6 col-sm-3 col-md-2 text-dark bg-light list-nav order-2 order-sm-1" style="min-height:95vh">
                 <a href="/home">
-                            <h5 class="bk-nav-item text-light"> Make List +</h5><br>
+                            <h5 class="bk-nav-item text-dark"> Make List +</h5><br>
                         </a>
+                        <h5 class="bk-nav-item" style="text-decoration:underline">My booklists</h5>
                 @foreach ( $booklists as $booklist)
                     <a href="/booklist/{{ $booklist->id }}">
-                        <h5 class="bk-nav-item text-light"> {{ $booklist->title }}</h5><br>
+                        <h5 class="bk-nav-item text-dark list-nav-item"> {{ $booklist->title }}</h5><br>
                     </a>
                 @endforeach
             </div>
 
             <!-- Main UI for interacting with book lists/books/profiles/discover -->
-            <div class="col-9 col-md-8" style="background:slategrey">
+            <div class="col-9 col-md-8 order-1 order-sm-2" style="">
                 <main class="py-4">
                     @yield('content')
                 </main>
             </div>
 
             <!-- Side bar for connecting with other users -->
-            <div class="col-2 d-none d-md-block bg-light">
+            <div class="col-6 col-md-2 bg-light order-3">
                 <h5 class="bk-nav-item">See what others are reading</h5>
                 @foreach ( $users as $user)
                     <a href="/profile/{{ $user->id }}">

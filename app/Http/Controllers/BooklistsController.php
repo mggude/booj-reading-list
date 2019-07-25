@@ -23,11 +23,17 @@ class BooklistsController extends Controller
         //Find the selected list
         $booklist = Booklist::find($id);
         $userId =  \Auth::user()->id;
+        //If booklist not found redirect home
+        if (!$booklist) {
+            return redirect('home');
+        } 
+        
         $list_user_id = $booklist->user_id;
         if ($userId !== $list_user_id) {
-            return redirect('/home')->with('status', 'This is not your book list');
+            //If booklist doesn't belong to user redirect home
+            return redirect('home')->with('status', 'This is not your book list');
         }
-
+        
         //Check to see if list has a sort preference
         if ($booklist->sort_id) {
             $listSortId = $booklist->sort_id;
@@ -78,7 +84,6 @@ class BooklistsController extends Controller
                 break;
         }
 
-        $userId =  \Auth::user()->id;
         //Fetching all of the users book lists for side nav
         $booklists = Booklist::where('user_id', $userId)->get();
         //Fetching other users for connecting
