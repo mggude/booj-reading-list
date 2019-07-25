@@ -87,7 +87,7 @@ class BooklistsController extends Controller
         //Fetching all of the users book lists for side nav
         $booklists = Booklist::where('user_id', $userId)->get();
         //Fetching other users for connecting
-        $users = User::all();
+        $users = User::where('id', '!=', auth()->id())->get();
 
         return view('booklist', compact('booklist', 'books', 'booklists', 'users'));
     }
