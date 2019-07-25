@@ -33,4 +33,3 @@ Route::put('/book/{id}', 'BooksController@update')->name('update-book');
 Route::post('/book/multiple', 'BooksController@multiple')->name('update-multiple');
 
 Route::get('/{any}', 'HomeController@catchAll')->where('any', '.*');
-Route::any('/{any}', 'HomeController@index')->where('any', '.*');

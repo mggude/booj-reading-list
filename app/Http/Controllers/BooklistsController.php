@@ -118,10 +118,9 @@ class BooklistsController extends Controller
         return redirect($url);
     }
 
-    //Updating the default sort order for the list
     public function update(Request $request, $id)
     {
-
+        //Updating the sort order for the list
         //Retrieving values from submitted form
         $sortOption = $request->sortOptions;
         $sortVal = $request->sortid;
@@ -135,7 +134,6 @@ class BooklistsController extends Controller
         $booklist->save();
 
         return redirect('/booklist'.'/'.$id);
-
     }
 
     //Destroy a book list

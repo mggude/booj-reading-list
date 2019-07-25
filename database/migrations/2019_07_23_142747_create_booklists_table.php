@@ -17,9 +17,8 @@ class CreateBooklistsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->string('title');
-            $table->string('creator');
+            $table->string('creator')->nullable();
             $table->string('sort_id')->nullable();
-            $table->date('created_at');	
             $table->timestamps();
         });
     }

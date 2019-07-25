@@ -51,7 +51,12 @@ class BooksController extends Controller
 
     //Create a new book
     public function create(Request $request)
-    {        
+    {     
+
+        //Check to see if destination booklist exists
+        $bookDestination = Booklist::where('id', $request->list_id);
+        if(!$bookDestination) {
+        }
 
         //Validate that the book has a title
         $this->validate(request(), [
@@ -59,6 +64,8 @@ class BooksController extends Controller
             'title' => 'required'
 
         ]);
+
+        $sort_id = Book::count() + 1;
         
         $book = new Book;
         //Associate book with a user
@@ -66,7 +73,7 @@ class BooksController extends Controller
         //Associate book with a list
         $book->list_id = $request->list_id;
         //Sort id for users custom list
-        $book->sort_id = Book::count() + 1;
+        $book->sort_id = $sort_id;
         //Title
         $book->title = $request->title;
         //Author
@@ -116,5 +123,4 @@ class BooksController extends Controller
         return redirect()->back()->with('message', 'Book successfully updated!');
 
     }
-
 }

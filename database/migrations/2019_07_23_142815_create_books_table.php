@@ -17,7 +17,7 @@ class CreateBooksTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->integer('list_id');
-            $table->integer('sort_id');
+            $table->integer('sort_id')->nullable();
             $table->string('title');
             $table->string('author')->nullable();
             $table->date('date_completed')->nullable();

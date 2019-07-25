@@ -36,6 +36,14 @@
             min-height: 95vh;
         }
 
+        #col-left {
+            border-right: 1px solid lightgray;
+        }
+
+        #col-right{
+            border-left: 1px solid lightgray;
+        }
+
         </style>
 </head>
 <body>
@@ -102,7 +110,7 @@
         <div class="row no-gutters justify-content-center">
 
             <!-- Side navigation for users book lists -->
-            <div class="col-6 col-sm-3 col-md-2 text-dark bg-light list-nav order-2 order-sm-1" style="min-height:95vh">
+            <div class="col-6 col-sm-3 col-md-2 text-dark bg-light list-nav order-2 order-sm-1" style="min-height:95vh" id="col-left">
                 <a href="/home">
                             <h5 class="bk-nav-item text-dark"> Make List +</h5><br>
                         </a>
@@ -122,7 +130,7 @@
             </div>
 
             <!-- Side bar for connecting with other users -->
-            <div class="col-6 col-md-2 bg-light order-3">
+            <div class="col-6 col-md-2 bg-light order-3" id="col-right">
                 <h5 class="bk-nav-item">See what others are reading</h5>
                 @foreach ( $users as $user)
                     <a href="/profile/{{ $user->id }}">
@@ -133,23 +141,5 @@
 
         </div>    
     </div>
-
-    <!-- jQuery -->
-    <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
-    
-    <script>
-        $('#userAction').on('change', function(){
-            console.log("change")
-        if( $(this).val()==="delete"){
-        $("#select-list").hide()
-        }
-        else{
-            return $("#select-list").show()
-        }
-    });
-    </script>
 </body>
 </html>

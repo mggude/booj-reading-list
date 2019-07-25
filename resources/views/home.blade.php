@@ -49,7 +49,7 @@
         @else
                 <div class="col-10">
                     <div class="alert alert-info alert-dismissible fade show" role="alert" style="margin-top:20px">
-                        <strong>Looks like you don't have a book list yet!</strong> Use the form below to get started.
+                        <strong>Looks like you don't have a book list yet!</strong> Use the form above to get started.
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

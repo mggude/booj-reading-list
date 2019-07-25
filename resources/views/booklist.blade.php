@@ -5,7 +5,7 @@
 @section('content')
 <div class="home-console">
     <!-- Row one renders list details -->
-    <div class="row no-gutters bg-white">
+    <div class="row no-gutters bg-light">
         <div class="col-10" style="padding-left:20px">
             <h2>{{ $booklist->title }}</h2>
             <p>Creator: <strong>{{ $booklist->creator }}</strong></p>
@@ -13,7 +13,7 @@
         </div>
     </div>
     <!-- Row two, buttons for collapsible forms -->
-    <div class="row no-gutters justify-content-center bg-white" style="padding-bottom:20px">
+    <div class="row no-gutters justify-content-center bg-light" style="padding-bottom:20px">
         <div class="col">
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#add-book-form" aria-expanded="false" aria-controls="multiCollapseExample2">Add A Book +</button>
         </div>
@@ -33,7 +33,7 @@
     <!-- Row three contains collapsible forms -->
     <div class="row no-gutters justify-content-center bg-light">
         <!-- Add Book Form -->
-        <div class="col-12 col-lg-4" style="background-color:white">
+        <div class="col-12 col-lg-4">
             <div class="collapse multi-collapse" id="add-book-form">
             <p style="text-align:center"><strong>Add a book to this list</strong></p>
             <form method="POST" action="/book">
@@ -66,7 +66,7 @@
         <!-- Only render update forms if there are books to update -->
         @if ( count($books) > 0 )
             <!-- Edit Selected Books Form -->
-            <div class="col-10 col-md-6 col-lg-4 bg-white">
+            <div class="col-10 col-md-6 col-lg-4 bg-light">
                 <div class="collapse multi-collapse" id="edit-slct-form">
                     <input type="text" name="listId" value="{{ $booklist->id }}" style="display:none">
                     <label for="userAction">Move or delete selected books</label>
@@ -90,7 +90,7 @@
                 </div> 
             </div>
             <!-- Sort List Form -->
-            <div class="col-10 col-md-6 col-lg-4">
+            <div class="col-10 col-md-6 col-lg-4 bg-light">
                 <div class="collapse multi-collapse" id="sort-books-form">
                     <form method="POST" action="/booklist/{{ $booklist->id }}">
                         {{method_field('PUT')}}
