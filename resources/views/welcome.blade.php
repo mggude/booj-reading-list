@@ -13,7 +13,7 @@
         <style>
             html, body {
                 height: 200px;
-  background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,.3));
+                background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,.3));
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;

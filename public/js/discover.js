@@ -1,11 +1,11 @@
 $( document ).ready(function() {
 
     const categories = [
-        "php",
-        "docker",
-        "coding",
-        "data",
-        "algorithms"
+        "PHP",
+        "Docker",
+        "Amazon",
+        "Agile",
+        "Algorithms"
     ];
     // GET https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=yourAPIKey
 
@@ -18,8 +18,6 @@ $( document ).ready(function() {
                         return res;
                 });
     }
-
-
 
     //function for ajax call
     getBookData = (category) => {
@@ -36,7 +34,7 @@ $( document ).ready(function() {
         $.ajax({
             url: "https://www.googleapis.com/books/v1/volumes?q=" + category + "API KEY",
             method: "GET"
-            }).then(function(res) {
+            }).done(function(res) {
                 //Creating card for each book and appending to scroll row
                 for (let i=0; i < res.items.length && i < 15; i++) {
                     let book = res.items[i].volumeInfo;

@@ -1,10 +1,11 @@
+<!-- View of individual book -->
+
 @extends('layouts.auth')
 
 @section('content')
-    <div class="row justify-content-center">
-        <a href="/home">Back Home</a>
+    <div class="row no-gutters justify-content-center">
         <!-- Book card -->
-        <div class="col- 10 col-sm-8 col-md-6">
+        <div class="col-10 col-sm-8 col-md-4">
             <div class="card mb-3 book-display" style="max-width: 540px;">
                 <!-- Book card image -->
                 <div class="row no-gutters">
@@ -14,7 +15,13 @@
                 </div> 
                 <!-- Book Edit button -->
                 <div class="row no-gutters">
-                    <button class="btn btn-primary col-4" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Edit this book</button>
+                    <button class="btn btn-primary col-4" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">
+                    @if ( $book->user_id === $user_id)
+                        Edit this book
+                    @else
+                        Add this book
+                    @endif
+                    </button>
                 </div>
                 <!-- Book info display -->
                 <div class="row no-gutters">
@@ -24,7 +31,7 @@
                                 <h5 class="card-title">{{ $book->title }}</h5>
                                 <p class="card-text">By: <strong>{{ $book->author }}</strong></p>
                                 <p class="card-text">Date Completed: <strong>{{ $book->date_completed }}</strong></p>
-                                <p class="card-text">My Rating: <strong>{{ $book->rating }}</strong></p>
+                                <p class="card-text">Rating: <strong>{{ $book->rating }}</strong></p>
                             </div>
                         </div>
                     </div>
@@ -32,26 +39,58 @@
                 <!-- Book edit form -->
                 <div class="row no-gutters">
                     <div class="collapse multi-collapse" id="multiCollapseExample2">
-                        <form method="POST" action="/book/{{ $book->id }}">
-                        {{method_field('PUT')}}
+                        <!-- If the book's user id equals the authenticated id render update form else add form -->
+                        @if ( $book->user_id === $user_id)
+                            <form method="POST" action="/book/{{ $book->id }}">
+                            {{method_field('PUT')}}
+                                {{ csrf_field() }}
+                                <div class="row no-gutters">
+                                    <input class="form-control" type="text" name="title" value="{{ $book->title }}" placeholder="{{ $book->title }}" required>
+                                    <input class="form-control" type="text" name="author" value="{{ $book->author }}" placeholder="{{ $book->author }}">
+                                    <input class="form-control" type="date" name="date_completed" value="{{ $book->date_completed }}" placeholder="{{ $book->date_completed }}">
+                                    <input class="form-control" type="integer" name="rating" value="{{ $book->rating }}" placeholder="{{ $book->rating }}">
+                                </div>
+                                <button type="submit" class="btn btn-success add-btn" style="text-align:right;float:right"> 
+                                            Edit Book
+                                </button>
+                            </form>
+                        @else
+                        <form method="POST" action="/book">
                             {{ csrf_field() }}
                             <div class="row no-gutters">
-                                <input class="form-control" type="text" name="title" placeholder="{{ $book->title }}" required>
-                                <input class="form-control" type="text" name="author" placeholder="{{ $book->author }}">
-                                <input class="form-control" type="date" name="date_completed" placeholder="{{ $book->date_completed }}">
-                                <input class="form-control" type="integer" name="rating" placeholder="{{ $book->rating }}">
+                                <input class="form-control" type="text" name="title" value="{{ $book->title }}" placeholder="{{ $book->title }}" required>
+                                <input class="form-control" type="text" name="author" value="{{ $book->author }}" placeholder="{{ $book->author }}">
+                                <input class="form-control" type="date" name="date_completed" placeholder="Date Completed">
+                                <input class="form-control" type="integer" name="rating" placeholder="Rating">
+                                <div class="form-group">
+                                    <label for="list_id">Select a book list for this book</label>
+                                    <select name="list_id" class="form-control" type="select" required>
+                                        @foreach ( $booklists as $booklist)
+                                            <option value="{{ $booklist->id }}">{{ $booklist->title }}</option>
+                                        @endforeach
+                                    </select>
+                            </div>
                             </div>
                             <button type="submit" class="btn btn-success add-btn" style="text-align:right;float:right"> 
-                                        Edit Book
+                                        Add Book
                             </button>
                         </form>
+                        @endif
+
                     </div>
+                   
                     @if (session('message'))
-        
-                            <div class="alert alert-success" role="alert">
-                            {{ session('message') }}
+                            <div class="col-10">
+                                <div class="alert alert-info alert-dismissible fade show" role="alert" style="margin-top:20px">
+                                {{ session('message') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
                             </div>
                         @endif
+                        <a href="/home">Back Home</a>
+
                 </div>
             </div>
         </div>

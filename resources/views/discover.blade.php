@@ -1,5 +1,5 @@
 <!-- View for /home/discover route -->
-@extends('layouts.auth')
+@extends('layouts.console')
 
 @section('content')
 
@@ -9,13 +9,12 @@
     @endif
 
     <div>
-        <a href="/home">Home</a>
-        <nav id="navbar-example2" class="navbar sticky-top navbar-dark bg-dark">
+        <nav id="navbar-example2" class="navbar sticky-top navbar-dark bg-dark" style="margin-top:-25px" >
             <a class="navbar-brand" href="#">Categories</a>
             <ul class="nav nav-pills" id="discover-nav"></ul>
         </nav>
 
-        <div class="row no-gutters justify-content-center" style="color:white">
+        <!-- <div class="row no-gutters justify-content-center" style="color:white">
             <div class="form-check col-4 col-sm-2 col-md-1">
                 <input class="form-check-input" type="radio" name="searchParam"value="title" checked>
                 <label class="form-check-label" for="searchTitle">
@@ -34,22 +33,13 @@
                     Subject
                 </label>
             </div>
-
-
             <div class="input-group search-area">
                 <input class="col-8 col-lg-4" type="text" id="searchBox">
                 <button class="col-2 col-lg-1" id="searchButton">Search</button>
             </div>
-        </div>
+        </div> -->
 
-        <div id="searchResults">
-            
-        </div>
-
-        <!-- Modal For Adding Books -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-            Add Book
-            </button>
+        <div id="searchResults"></div>
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

@@ -18,8 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home/discover', 'HomeController@discover')->name('home-discover');
-Route::get('/profile/{id}', 'HomeController@profile')->name('user-profile');
+Route::get('/home/discover', 'HomeController@discover')->name('discover');
+Route::get('/profile/{id}', 'HomeController@profile')->name('profile');
 
 
 Route::post('/booklist', 'BooklistsController@create')->name('create-list');

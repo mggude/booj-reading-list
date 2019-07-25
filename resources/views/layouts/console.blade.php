@@ -23,12 +23,6 @@
     <link rel="stylesheet" href="{{ URL::asset('css/home.css') }}" />
     <link rel="stylesheet" href="{{ URL::asset('css/discover.css') }}" />
 
-    <style>
-        body {
-            background-image: linear-gradient(to left, rgba(255,0,0,0), rgba(255,0,0,.3));
-        }
-    </style>
-
 </head>
 <body>
     <div id="app">
@@ -61,12 +55,12 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                            
+                           
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-right" style="position:initial" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('home') }}">
                                         Home
                                     </a>
@@ -101,6 +95,8 @@
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="{{ URL::asset('js/discover.js') }}"></script>
     
 </body>
 </html>

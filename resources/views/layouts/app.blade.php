@@ -27,8 +27,8 @@
             margin: 7px 0 0 7px;
         }
 
-        .empty-list {
-            
+        .home-console {
+            margin-top: -25px;
         }
         </style>
 </head>
@@ -68,6 +68,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('home') }}">
+                                        Home
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('discover') }}">
+                                        Discover
+                                    </a>
+                                    
+                                    
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -101,14 +109,14 @@
 
             <!-- Main UI for interacting with book lists/books/profiles/discover -->
             <div class="col-9 col-md-8" style="background:slategrey">
-                <main class="py-4" style="margin-left:15px;margin-right:15px">
+                <main class="py-4">
                     @yield('content')
                 </main>
             </div>
 
             <!-- Side bar for connecting with other users -->
             <div class="col-2 d-none d-md-block bg-light">
-                <h5 class="bk-nav-item">Connect With Other Users</h5>
+                <h5 class="bk-nav-item">See what others are reading</h5>
                 @foreach ( $users as $user)
                     <a href="/profile/{{ $user->id }}">
                         <h5 class="bk-nav-item">{{ $user->name }}</h5><br>
@@ -118,5 +126,23 @@
 
         </div>    
     </div>
+
+    <!-- jQuery -->
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    
+    <script>
+        $('#userAction').on('change', function(){
+            console.log("change")
+        if( $(this).val()==="delete"){
+        $("#select-list").hide()
+        }
+        else{
+            return $("#select-list").show()
+        }
+    });
+    </script>
 </body>
 </html>

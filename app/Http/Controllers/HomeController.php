@@ -24,23 +24,24 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+    /** Home page when logged in */
     public function index()
     {
-
-        $userId =  \Auth::user()->id;
         //Fetching all of the users book lists
-        $booklists = Booklist::where('user_id', $userId)->get();
-        // fetch several users for the connect with others side bar
-        $users = User::all();
+        $booklists = Booklist::where('user_id', auth()->id())->get();
+        //Fetch several users, for the connect with others side bar
+        $users = User::where('id', '!=', auth()->id())->get();
         return view('home', compact('booklists', 'users'));
         
     }
 
+    //Handles route for the discover page
     public function discover()
     {
-        //Getting the users book lists for access in the add book form
-        $userId =  \Auth::user()->id;
-        $booklists = Booklist::where('user_id', $userId)->get();
+
+        //Fetching all of the users book lists for access in the add book form
+        $booklists = Booklist::where('user_id', auth()->id())->get();
 
         return view('discover', compact('booklists'));
         
@@ -49,10 +50,11 @@ class HomeController extends Controller
     public function profile($id)
     {
 
+        //For seeing what others are reading.
+        //Ability to make boooklists private coming soon
         $profile = User::find($id);
         $booklists = Booklist::where('user_id', $id)->get();
         $books = Book::where('user_id', $id)->get();
-        // fetch several users for the connect with others side bar
 
         return view('profile', compact('profile', 'booklists', 'books'));
         
