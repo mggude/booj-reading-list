@@ -14,10 +14,11 @@ probably the best reading list app ever
     </p>
 
 ##### Live Demo
-    [boojreadinglist.xyz](http://boojreadinglist.xyz)
+   
+   [boojreadinglist.xyz](http://boojreadinglist.xyz)
 
 
-Built using...
+##### Built using...
 * Laravel framework
 * MySQL Database
 * Hosted on AWS EC2 instance
@@ -29,37 +30,42 @@ Built using...
 **Register an account**
 
  <div margin:"0 auto">
-    <img alt="Connor Jaksik" src="https://raw.githubusercontent.com/jaksik/booj-reading-list/master/public/images/register.PNG" width="50%" />
+    <img alt="Connor Jaksik" src="https://raw.githubusercontent.com/jaksik/booj-reading-list/master/public/images/register.PNG" width="49%" />
 </div>
 
-**Create a book list**
 
  <div margin:"0 auto">
+ **Create a book list**
     <img alt="Connor Jaksik" src="https://raw.githubusercontent.com/jaksik/booj-reading-list/master/public/images/createlist.PNG" width="49%" style="float:left/>
 </div>     
 
-**Add a book to your list**
 
  <div margin:"0 auto">
+ **Add a book to your list**
     <img alt="Connor Jaksik" src="https://raw.githubusercontent.com/jaksik/booj-reading-list/master/public/images/addbook.PNG" width="49%" style="float:left"/>
 </div>     
 
-**Discover new books**
 
  <div margin:"0 auto">
-    <img alt="Connor Jaksik" src="https://raw.githubusercontent.com/jaksik/booj-reading-list/master/public/images/discover.PNG" width="50%" />
-</div> 
+ **Edit your list**
 
-**Edit your list**
-
- <div margin:"0 auto">
     <img alt="Connor Jaksik" src="https://raw.githubusercontent.com/jaksik/booj-reading-list/master/public/images/editlist.PNG" width="50%" />
 </div> 
 
-**See what others are reading**
 
  <div margin:"0 auto">
-    <img alt="Connor Jaksik" src="https://raw.githubusercontent.com/jaksik/booj-reading-list/master/public/images/connect.PNG" width="50%" />
+ **Discover new books**
+
+    <img alt="Connor Jaksik" src="https://raw.githubusercontent.com/jaksik/booj-reading-list/master/public/images/discover.PNG" width="49%" style="float:left" />
+</div> 
+
+
+
+
+ <div margin:"0 auto">
+ **See what others are reading**
+
+    <img alt="Connor Jaksik" src="https://raw.githubusercontent.com/jaksik/booj-reading-list/master/public/images/connect.PNG" width="49%" style="float:left"/>
 </div> 
 
 
