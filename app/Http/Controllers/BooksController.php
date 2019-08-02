@@ -52,13 +52,13 @@ class BooksController extends Controller
                     break;
             }
 
-            return view('books', compact('books'));
+            return view('readinglist', compact('books'));
 
         } else {
 
             //If no sort request, return all books
             $books = Book::all();
-            return view('books', compact('books'));
+            return view('readinglist', compact('books'));
         }
 
         
@@ -72,7 +72,7 @@ class BooksController extends Controller
     public function create()
     {
     
-        return view('createbooks');
+        return view('createbook');
 
     }
 
@@ -85,7 +85,6 @@ class BooksController extends Controller
     public function store(Request $request)
     {
         $book = new Book;
-
         //Title
         $book->title = $request->title;
         //Author
@@ -95,7 +94,7 @@ class BooksController extends Controller
         //Saving to the database
         $book->save();
 
-        return redirect('books');
+        return redirect('readinglist');
     }
 
     /**

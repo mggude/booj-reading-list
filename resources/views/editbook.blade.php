@@ -4,6 +4,7 @@
 
 @section('content')
 
+    <a href="/books">Back to reading list</a><br>
     <a href="/books/{{ $book->id }}">Back to Book</a>
    
     <div class="row no-gutters" style="margin-bottom:15px">

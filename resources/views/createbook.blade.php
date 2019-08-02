@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <a href="/">Home</a>
+    <a href="/books">Back to reading list</a><br>
     <h1>Booj Reading List</h1>
 
   

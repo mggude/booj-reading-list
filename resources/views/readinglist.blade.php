@@ -12,7 +12,7 @@
     <div class="row no-gutters" style="margin-bottom:15px">
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown button
+                Sort List
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="{{ route('books', ['sort' => 'title', 'order' => 'asc']) }}">Title Ascending</a>
@@ -28,19 +28,17 @@
 
     <!-- Book list headers -->
     <div class="row no-gutters" style="margin-bottom:15px">
-            <strong class="col-4">Title</strong>
-            <strong class="col-4">Author</strong>
+            <strong class="col-5">Title</strong>
+            <strong class="col-5">Author</strong>
             <strong class="col-2">Rating</strong>
-            <strong class="col-2">Up Vote</strong>
         </div>
 
     <!-- Rendering the book data -->
     @foreach ( $books as $book)
         <div class="row no-gutters bg-light text-dark" style="padding-left:10px">
-            <p class="col-4"><a href="/books/{{ $book->id }}" class="">{{ $book -> title }}</a></p>
-            <p class="col-4">{{ $book -> author }}</p>
+            <p class="col-5"><a href="/books/{{ $book->id }}" class="">{{ $book -> title }}</a></p>
+            <p class="col-5">{{ $book -> author }}</p>
             <p class="col-2">{{ $book -> rating }}</p>
-            <p class="col-2">Up Vote</p>
         </div>
         @endforeach
 
