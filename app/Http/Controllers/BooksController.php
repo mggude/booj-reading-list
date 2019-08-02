@@ -3,124 +3,158 @@
 namespace App\Http\Controllers;
 
 use App\Book;
-use App\Booklist;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
 {
-
-    public function __construct()
-    {
-
-        $this->middleware('auth');
-
-    }
-
-    // Handle multiple selected books requests
-    public function multiple(Request $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
     {   
-        //Action for selected books. Move? Delete?
-        $action = $request->userAction;
-        //List id of destination booklist
-        $newLocation = $request->booklist;
-        //The books as an array
-        $items = $request->bookitem;
-
-        //Checking if items are selected
-        if ($items) {
-            switch ($action) {
-                case "delete":
-                        //Deleting the selected books
-                        foreach($items as $item) { Book::find($item)->delete(); };
-                        return redirect()->back();
-                        break;
-                case "move":
-                        //Changing the location of the selected books
-                        foreach($items as $item) { Book::find($item)->update(['list_id' => $newLocation ]); };
-                        return redirect()->back();
-                        break;
+        //If sort request, order books
+        if ($request->sort) {
+            $sortId = $request->sort.$request->order;
+            switch ($sortId) {
+                //Sort by title
+                case "titleasc":
+                    $books = Book::orderBy('title', 'asc')->get();
+                    break;
+                case "titledesc":
+                    $books = Book::orderBy('title', 'desc')->get();
+                    break;
+                //Sort by author
+                case "authorasc":
+                    $books = Book::orderBy('author', 'asc')->get();
+                    break;
+                case "authordesc":
+                    $books = Book::orderBy('author', 'desc')->get();
+                    break;
+                //Sort by rating
+                case "ratingasc":
+                    $books = Book::orderBy('rating', 'asc')->get();
+                    break;
+                case "ratingdesc":
+                    $books = Book::orderBy('rating', 'desc')->get();
+                    break;
+                //Sort by custom
+                case "customasc":
+                    $books = Book::orderBy('id', 'asc')->get();
+                    break;
+                case "customdesc":
+                    $books = Book::orderBy('id', 'desc')->get();
+                    break;
+                //Default
                 default:
-                    return redirect()->back()->with('status', 'You must select an action.');
+                    $books = Book::all();
                     break;
             }
-        } else { 
-            //Redirecting if no books selected
-            return redirect()->back()->with('status', 'You must select a book.');
+
+            return view('books', compact('books'));
+
+        } else {
+
+            //If no sort request, return all books
+            $books = Book::all();
+            return view('books', compact('books'));
         }
+
+        
     }
 
-    //Create a new book
-    public function create(Request $request)
-    {     
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+    
+        return view('createbooks');
 
-        //Check to see if destination booklist exists
-        $bookDestination = Booklist::where('id', $request->list_id);
-        if(!$bookDestination) {
-        }
+    }
 
-        //Validate that the book has a title
-        $this->validate(request(), [
-
-            'title' => 'required'
-
-        ]);
-
-        $sort_id = Book::count() + 1;
-        
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         $book = new Book;
-        //Associate book with a user
-        $book->user_id = auth()->id();
-        //Associate book with a list
-        $book->list_id = $request->list_id;
-        //Sort id for users custom list
-        $book->sort_id = $sort_id;
+
         //Title
         $book->title = $request->title;
         //Author
         $book->author = $request->author;
-        //Date user completed book
-        $book->date_completed = $request->date_completed;
         //Users rating
         $book->rating = $request->rating;
         //Saving to the database
         $book->save();
 
-        return redirect()->back()->with('message', 'Book saved!');
+        return redirect('books');
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
         //Find book by ID
         $book = Book::find($id);
-        //For rendering update or add form on view
-        $user_id =  \Auth::user()->id;
-        $booklists = Booklist::where('user_id', auth()->id())->get();
-
-        return view('book', compact('book', 'user_id', 'booklists'));
+        
+        return view('book', compact('book'));
 
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //Find book by ID
+        $book = Book::find($id);
+        
+        return view('editbook', compact('book'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
-
         $book = Book::find($id);
-
-        //Authorizing the book update
-        if ( $book->user_id !== auth()->id()) {
-            return abort(403, 'Unauthorized action.');
-        }
-
+       
         $book->title = $request->title;
-
         $book->author = $request->author;
-
-        $book->date_completed = $request->date_completed;
-
         $book->rating = $request->rating;
-
         $book->save();
         
-        return redirect()->back()->with('message', 'Book successfully updated!');
+        return redirect('/books'.'/'.$id);
+    }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        Book::find($id)->delete();
+        return redirect('books');
     }
 }

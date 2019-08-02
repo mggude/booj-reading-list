@@ -13,9 +13,4 @@ class Book extends Model
         'list_id',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
 }
